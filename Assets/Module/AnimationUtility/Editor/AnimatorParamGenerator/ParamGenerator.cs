@@ -9,10 +9,10 @@ namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
     /// </summary>
     public class GeneratorWindow : EditorWindow
     {
-        private AnimatorControllerBindGeneratorSetting _settings;
+        private AnimatorControllerBindingGeneratorSetting _settings;
         private Vector2 _scroll;
 
-        [MenuItem("Tools/Animator Parameter Settings")]
+        [MenuItem("Tools/Animator Controller Binding Generator")]
         private static void Open()
         {
             var w = GetWindow<GeneratorWindow>("Animator Param Settings");
@@ -22,22 +22,22 @@ namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
 
         private void OnEnable()
         {
-            _settings = AnimatorControllerBindGeneratorSetting.LoadOrCreate();
+            _settings = AnimatorControllerBindingGeneratorSetting.LoadOrCreate();
         }
 
         private void OnGUI()
         {
             if (_settings == null)
             {
-                _settings = AnimatorControllerBindGeneratorSetting.LoadOrCreate();
+                _settings = AnimatorControllerBindingGeneratorSetting.LoadOrCreate();
             }
 
             _scroll = EditorGUILayout.BeginScrollView(_scroll);
 
             EditorGUILayout.LabelField("Setting Asset", EditorStyles.boldLabel);
-            _settings = (AnimatorControllerBindGeneratorSetting)EditorGUILayout.ObjectField(
+            _settings = (AnimatorControllerBindingGeneratorSetting)EditorGUILayout.ObjectField(
                 _settings,
-                typeof(AnimatorControllerBindGeneratorSetting),
+                typeof(AnimatorControllerBindingGeneratorSetting),
                 false,
                 null
             );

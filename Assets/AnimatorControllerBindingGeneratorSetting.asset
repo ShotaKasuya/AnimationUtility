@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b509f074060a4aacb9be1f4c39449271, type: 3}
-  m_Name: AnimatorParamGeneratorSettings
-  m_EditorClassIdentifier: AnimationUtility.Editor::Module.EditorExtension.Editor.AnimatorParamGenerator.AnimatorParamGeneratorSetting
+  m_Name: AnimatorControllerBindingGeneratorSetting
+  m_EditorClassIdentifier: AnimationUtility.Editor::Module.AnimationUtility.Editor.AnimatorParamGenerator.AnimatorControllerBindingGeneratorSetting
   namespaceName: 
-  outputFolder: Assets/Demo/_Script
+  outputFolder: Assets/Demo
   settingGroupList:
   - controller: {fileID: 9100000, guid: 14853e8a4ac94ed45805948c449ac46c, type: 2}
-    className: ControllerBind
+    className: ControllerBinding

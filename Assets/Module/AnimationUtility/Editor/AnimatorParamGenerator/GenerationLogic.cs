@@ -10,7 +10,7 @@ namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
 {
     public static class GenerationLogic
     {
-        internal static void GenerateForGroup(AnimatorControllerBindGeneratorSetting settings)
+        internal static void GenerateForGroup(AnimatorControllerBindingGeneratorSetting settings)
         {
             if (settings.settingGroupList == null)
             {
