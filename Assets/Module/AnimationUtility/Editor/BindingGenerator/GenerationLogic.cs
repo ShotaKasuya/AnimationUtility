@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
-namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
+namespace Module.AnimationUtility.Editor.BindingGenerator
 {
     public static class GenerationLogic
     {
@@ -17,6 +17,7 @@ namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
                 Debug.LogWarning("AnimatorParamGenerator: Setting group list is not set.");
                 return;
             }
+
             var outputPath = settings.outputFolder;
 
             foreach (var settingGroup in settings.settingGroupList)
@@ -135,19 +136,39 @@ namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
             sb.AppendLine(Ind(indent) + "{");
             foreach (var state in states)
             {
-                sb.AppendLine(Ind(indent + 1) + $"{state.name},");
+                sb.AppendLine(Ind(indent + 1) + $"{state.name.Replace(" ", "_")},");
             }
 
             sb.AppendLine(Ind(indent) + "}");
             sb.AppendLine();
 
-            // Generate Dictionary
+            // Generate Hash Dictionary
             sb.AppendLine(Ind(indent) +
                           "private static readonly Dictionary<State, int> StateHashes = new Dictionary<State, int>");
             sb.AppendLine(Ind(indent) + "{");
             foreach (var state in states)
             {
-                sb.AppendLine(Ind(indent + 1) + $"{{ State.{state.name}, Animator.StringToHash(\"{state.name}\") }},");
+                sb.AppendLine(Ind(indent + 1) +
+                              $"{{ State.{state.name.Replace(" ", "_")}, Animator.StringToHash(\"{state.name}\") }},");
+            }
+
+            sb.AppendLine(Ind(indent) + "};");
+            sb.AppendLine();
+
+            // Generate Length Dictionary
+            sb.AppendLine(Ind(indent) +
+                          "private static readonly Dictionary<State, float> StateLengths = new Dictionary<State, float>");
+            sb.AppendLine(Ind(indent) + "{");
+            foreach (var state in states)
+            {
+                var length = 0f;
+                if (state.motion is AnimationClip clip)
+                {
+                    length = clip.length;
+                }
+
+                sb.AppendLine(Ind(indent + 1) +
+                              $"{{ State.{state.name.Replace(" ", "_")}, {length}f }},");
             }
 
             sb.AppendLine(Ind(indent) + "};");
@@ -157,6 +178,13 @@ namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
             sb.AppendLine(Ind(indent) + "public static int ToHash(this State state)");
             sb.AppendLine(Ind(indent) + "{");
             sb.AppendLine(Ind(indent + 1) + "return StateHashes[state];");
+            sb.AppendLine(Ind(indent) + "}");
+            sb.AppendLine();
+
+            // Generate GetLength method
+            sb.AppendLine(Ind(indent) + "public static float GetLength(this State state)");
+            sb.AppendLine(Ind(indent) + "{");
+            sb.AppendLine(Ind(indent + 1) + "return StateLengths[state];");
             sb.AppendLine(Ind(indent) + "}");
         }
 
@@ -169,7 +197,10 @@ namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
                 CollectStatesRecursively(stateMachine, states);
             }
 
-            return states.Distinct().ToList();
+            return states
+                .GroupBy(s => s.name)
+                .Select(g => g.First())
+                .ToList();
         }
 
         private static void CollectStatesRecursively(AnimatorStateMachine stateMachine, List<AnimatorState> states)

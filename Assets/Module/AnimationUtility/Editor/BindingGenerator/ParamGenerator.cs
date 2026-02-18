@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
+namespace Module.AnimationUtility.Editor.BindingGenerator
 {
     /// <summary>
     /// AnimatorControllerで定義された`Parameter`の定数をフィールドに持つ

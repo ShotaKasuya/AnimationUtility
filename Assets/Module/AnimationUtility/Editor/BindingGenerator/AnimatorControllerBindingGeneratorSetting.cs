@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
-namespace Module.AnimationUtility.Editor.AnimatorParamGenerator
+namespace Module.AnimationUtility.Editor.BindingGenerator
 {
     internal class AnimatorControllerBindingGeneratorSetting : ScriptableObject
     {

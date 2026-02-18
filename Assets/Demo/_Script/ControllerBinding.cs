@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public static class ControllerBind
+public static class ControllerBinding
 {
     public enum Parameter
     {
@@ -39,8 +39,20 @@ public static class ControllerBind
         { State.RightDown, Animator.StringToHash("RightDown") },
     };
 
+    private static readonly Dictionary<State, float> StateLengths = new Dictionary<State, float>
+    {
+        { State.Default, 1f },
+        { State.LeftUp, 1f },
+        { State.RightDown, 1f },
+    };
+
     public static int ToHash(this State state)
     {
         return StateHashes[state];
+    }
+
+    public static float GetLength(this State state)
+    {
+        return StateLengths[state];
     }
 }

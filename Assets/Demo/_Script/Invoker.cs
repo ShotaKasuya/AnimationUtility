@@ -24,22 +24,22 @@ namespace Demo
 
         private void OnLeftInput()
         {
-            _animator.SetTrigger(ControllerBind.Parameter.Left.ToHash());
+            _animator.SetTrigger(ControllerBinding.Parameter.Left.ToHash());
         }
 
         private void OnRightInput()
         {
-            _animator.SetTrigger(ControllerBind.Parameter.Right.ToHash());
+            _animator.SetTrigger(ControllerBinding.Parameter.Right.ToHash());
         }
 
         private void OnUpInput()
         {
-            _animator.SetTrigger(ControllerBind.Parameter.Up.ToHash());
+            _animator.SetTrigger(ControllerBinding.Parameter.Up.ToHash());
         }
 
         private void OnDownInput()
         {
-            _animator.SetTrigger(ControllerBind.Parameter.Down.ToHash());
+            _animator.SetTrigger(ControllerBinding.Parameter.Down.ToHash());
         }
     }
 }

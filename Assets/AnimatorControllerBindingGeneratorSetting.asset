@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AnimatorControllerBindingGeneratorSetting
   m_EditorClassIdentifier: AnimationUtility.Editor::Module.AnimationUtility.Editor.AnimatorParamGenerator.AnimatorControllerBindingGeneratorSetting
   namespaceName: 
-  outputFolder: Assets/Demo
+  outputFolder: Assets/Demo/_Script
   settingGroupList:
   - controller: {fileID: 9100000, guid: 14853e8a4ac94ed45805948c449ac46c, type: 2}
     className: ControllerBinding
